@@ -1,6 +1,7 @@
 #ifndef ZYLINDERMANTEL_HH
 #define ZYLINDERMANTEL_HH
 
+#include "Koerper.hh"
 #include "Vektor.hh"
 
 class Zylindermantel {

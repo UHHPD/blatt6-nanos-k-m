@@ -13,7 +13,7 @@ double traegheit(Koerper* k, Vektor a, Vektor u){
     Vektor x = k->punkt();
     Vektor c = x - a;
     Vektor d = c.kreuz(u);
-    // Abstand Punkt x ud Gerade a + t*u
+    // Abstand Punkt x und Gerade a + t*u
     // Vektor n = ...;//Normalenvektor x-a kreuz u
     double r = d.betrag()/u.betrag(); //|n|/|u|
     // std::cout << x << " :" << r << std::endl;

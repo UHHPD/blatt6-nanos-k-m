@@ -1,43 +1,36 @@
-#include "Vektor.hh"
+#ifndef VEKTOR_HH
+#define VEKTOR_HH
+
 #include <iostream>
 
-int main() {
-  Vektor a(2, -1, 2);
-  Vektor v1(1, -2, 3);
-  Vektor v2(3, 1, 2);
+/*
+  Klasse fuer einen Punkt oder Vektor in drei Dimensionen
+ */
+class Vektor {
+public:
+  Vektor(double nx = 0, double ny = 0, double nz = 0);
 
-  // teste Konstruktor
-  std::cout << "x von " << a << " = 2?          "
-            << (a.x() == 2 ? "ok" : "NEIN!") << '\n';
-  std::cout << "y von " << a << " = -1?         "
-            << (a.y() == -1 ? "ok" : "NEIN!") << '\n';
-  std::cout << "z von " << a << " = 2?          "
-            << (a.z() == 2 ? "ok" : "NEIN!") << '\n';
+  double betrag();
 
-  // teste Betrag
-  std::cout << "Betrag von " << a << " = 3?     "
-            << (a.betrag() == 3 ? "ok" : "NEIN!") << '\n';
+  double x() { return x_; }
+  double y() { return y_; }
+  double z() { return z_; }
 
-  // test Einlese
-  Vektor b;
+  friend std::istream &operator>>(std::istream &is, Vektor &v);
+  friend std::ostream &operator<<(std::ostream &os, Vektor v);
 
-  std::cout << "Geben Sie 1 -3 3 ein:";
-  std::cin >> b;
+  Vektor operator+(Vektor v);
+  Vektor operator-(Vektor v);
 
-  std::cout << "eingebener Vektor" << b << " = (1,-3,3)? "
-            << (b == Vektor(1, -3, 3) ? "ok" : "NEIN!") << '\n';
+  double mal(Vektor v);
+  Vektor kreuz(Vektor v);
 
-  // teste Addition und Subtraktion
-  std::cout << a << " + " << v1 << " = (3,-3,5)?          "
-            << (a + v1 == Vektor(3, -3, 5) ? "ok" : "NEIN!") << '\n';
-  std::cout << a << " - " << v1 << " = (1,1,-1)?          "
-            << (a - v1 == Vektor(1, 1, -1) ? "ok" : "NEIN!") << '\n';
+  bool operator==(Vektor v) {
+    return ((x_ == v.x_) && (y_ == v.y_) && (z_ == v.z_));
+  }
 
-  // teste Skalar- und Kreuzprodukt
-  std::cout << v1 << " mal " << v2 << " = 7                "
-            << (v1.mal(v2) == 7 ? "ok" : "NEIN!") << '\n';
-  std::cout << v1 << " kreuz " << v2 << " = (-7,7,7)       "
-            << (v1.kreuz(v2) == Vektor(-7, 7, 7) ? "ok" : "NEIN!") << '\n';
+private:
+  double x_, y_, z_;
+};
 
-  return 0;
-}
+#endif
